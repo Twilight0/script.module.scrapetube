@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+'''
+    Scrapetube library
+    Author dermasmid, Twilight0
+
+    SPDX-License-Identifier: MIT Licence
+    See LICENSE for more information.
+'''
+
 import json
 import time
 import sys
@@ -129,7 +137,7 @@ def get_videos(url, api_endpoint, selector, limit, sleep):
     session = requests.Session()
     session.headers[
         "User-Agent"
-    ] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36"
+    ] = "Mozilla/5.0 (Windows NT 6.1; rv:101.0) Gecko/20100101 Firefox/101.0"
     is_first = True
     _quit = False
     count = 0
