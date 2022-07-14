@@ -10,7 +10,7 @@
 
 from __future__ import absolute_import
 
-from scrapetube import *
+from scrapetube import get_videos, get_channel, get_playlist, get_search
 
 
 yt_prefix = 'https://www.youtube.com/watch?v={0}'
@@ -39,7 +39,7 @@ def list_channel_videos(
     items_list = [
         dict(
             title=i['title']['runs'][0]['text'], url=yt_prefix.format(i['videoId']) if add_prefix else i['videoId'],
-            image=i['thumbnail'][thumb_quality]['url'],
+            image=i['thumbnail']['thumbnails'][thumb_quality]['url'],
             duration=duration_converter(i['thumbnailOverlays'][0]['thumbnailOverlayTimeStatusRenderer']['text']['simpleText'])
             ) for i in items_list
         ]
@@ -55,8 +55,8 @@ def list_playlists(
 
     items_list = [
         dict(
-            title=['title']['runs'][0]['text'], url=['playlistId'],
-            image=i['thumbnail'][0]['url']
+            title=i['title']['runs'][0]['text'], url=i['playlistId'],
+            image=i['thumbnail']['thumbnails'][0]['url']
             ) for i in items_list
     ]
 
@@ -69,7 +69,7 @@ def list_playlist_videos(url, limit=None, sleep=1, sort_by="newest",
     items_list = [
         dict(
             title=i['title']['runs'][0]['text'], url=yt_prefix.format(i['videoId']) if add_prefix else i['videoId'],
-            image=i['thumbnail'][thumb_quality]['url'],
+            image=i['thumbnail']['thumbnails'][thumb_quality]['url'],
             duration=duration_converter(i['thumbnailOverlays'][0]['thumbnailOverlayTimeStatusRenderer']['text']['simpleText'])
             ) for i in items_list
         ]
@@ -81,12 +81,14 @@ def list_search(
     query, limit=None, sleep=1, sort_by="relevance", results_type="video", add_prefix=True, thumb_quality=3
     ):
 
+    items_list = list(get_search(query, limit, sleep, sort_by, results_type))
+
     if results_type == 'video':
 
         items_list = [
         dict(
             title=i['title']['runs'][0]['text'], url=yt_prefix.format(i['videoId']) if add_prefix else i['videoId'],
-            image=i['thumbnail'][thumb_quality]['url'],
+            image=i['thumbnail']['thumbnails'][thumb_quality]['url'],
             duration=duration_converter(i['thumbnailOverlays'][0]['thumbnailOverlayTimeStatusRenderer']['text']['simpleText'])
             ) for i in items_list
         ]
@@ -95,8 +97,8 @@ def list_search(
 
         items_list = [
         dict(
-            title=['title']['runs'][0]['text'], url=['playlistId'],
-            image=i['thumbnail'][0]['url']
+            title=i['title']['runs'][0]['text'], url=i['playlistId'],
+            image=i['thumbnail']['thumbnails'][0]['url']
             ) for i in items_list
     ]
 
