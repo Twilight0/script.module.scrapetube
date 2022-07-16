@@ -31,8 +31,8 @@ def duration_converter(duration):
 
 def list_channel_videos(
     channel_id=None, channel_url=None, limit=None, sleep=1, sort_by="newest",
-    add_prefix=True, thumb_quality=3
-    ):
+    add_prefix=True, thumb_quality=-1
+):
 
     items_list = list(get_channel(channel_id, channel_url, limit, sleep, sort_by))
 
@@ -49,7 +49,7 @@ def list_channel_videos(
 
 def list_playlists(
     url, api='https://www.youtube.com/youtubei/v1/browse', renderer='gridPlaylistRenderer', limit=None, sleep=1
-    ):
+):
 
     items_list = list(get_videos(url, api, renderer, limit, sleep))
 
@@ -61,8 +61,7 @@ def list_playlists(
     ]
 
 
-def list_playlist_videos(url, limit=None, sleep=1, sort_by="newest",
-    add_prefix=True, thumb_quality=3):
+def list_playlist_videos(url, limit=None, sleep=1, add_prefix=True, thumb_quality=-1):
 
     items_list = list(get_playlist(url, limit, sleep))
 
@@ -78,8 +77,8 @@ def list_playlist_videos(url, limit=None, sleep=1, sort_by="newest",
 
 
 def list_search(
-    query, limit=None, sleep=1, sort_by="relevance", results_type="video", add_prefix=True, thumb_quality=3
-    ):
+    query, limit=None, sleep=1, sort_by="relevance", results_type="video", add_prefix=True, thumb_quality=-1
+):
 
     items_list = list(get_search(query, limit, sleep, sort_by, results_type))
 
@@ -93,6 +92,10 @@ def list_search(
             ) for i in items_list
         ]
 
+        print(items_list)
+
+        return items_list
+
     elif results_type == 'playlist':
 
         items_list = [
@@ -101,6 +104,8 @@ def list_search(
             image=i['thumbnail']['thumbnails'][0]['url']
             ) for i in items_list
     ]
+
+        return items_list
 
     else:
 
