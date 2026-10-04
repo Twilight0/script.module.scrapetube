@@ -150,13 +150,13 @@ def _build_playlist_dict(item):
 def list_channel_videos(
     channel_id=None, channel_url=None, limit=None, sleep=1, sort_by="newest",
     content_type="videos", add_prefix=True, thumb_quality=-1, add_url=YT_PREFIX,
-    proxies=None
+    proxies=None, cookies=None
 ):
 
     items_list = list(get_channel(
         channel_id=channel_id, channel_url=channel_url, limit=limit,
         sleep=sleep, sort_by=sort_by, content_type=content_type,
-        proxies=proxies,
+        proxies=proxies, cookies=cookies,
     ))
 
     items_list = [
@@ -180,9 +180,9 @@ def list_playlists(
     return items_list
 
 
-def list_playlist_videos(url, limit=None, sleep=1, add_prefix=True, thumb_quality=-1, add_url=YT_PREFIX):
+def list_playlist_videos(url, limit=None, sleep=1, add_prefix=True, thumb_quality=-1, add_url=YT_PREFIX, cookies=None):
 
-    items_list = list(get_playlist(url, limit, sleep))
+    items_list = list(get_playlist(url, limit, sleep, cookies=cookies))
 
     items_list = [
         _build_video_dict(i, add_prefix, thumb_quality, add_url)
@@ -193,10 +193,10 @@ def list_playlist_videos(url, limit=None, sleep=1, add_prefix=True, thumb_qualit
 
 
 def list_search(
-    query, limit=None, sleep=1, sort_by="relevance", results_type="video", add_prefix=True, thumb_quality=-1, add_url=YT_PREFIX
+    query, limit=None, sleep=1, sort_by="relevance", results_type="video", add_prefix=True, thumb_quality=-1, add_url=YT_PREFIX, cookies=None
 ):
 
-    items_list = list(get_search(query, limit, sleep, sort_by, results_type))
+    items_list = list(get_search(query, limit, sleep, sort_by, results_type, cookies=cookies))
 
     if results_type == 'video':
 

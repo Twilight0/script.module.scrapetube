@@ -1,3 +1,7 @@
+[B]2.9.0[/B]
+- Optional login cookies on all core calls and wrapper list_* helpers, for own/private videos
+- Authenticated youtubei continuations via SAPISIDHASH headers
+
 [B]2.8.0[/B]
 - Sync core with merged upstream (peoyli + ahai72160 fixes for YouTube layout changes)
 - Wrapper hardened for new lockupViewModel/shorts shapes (tolerant title/thumbnail/duration)
