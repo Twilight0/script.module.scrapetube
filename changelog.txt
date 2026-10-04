@@ -1,16 +1,11 @@
-[B]2.10.0[/B]
-- Parse logged-in page layout (yt-initial-data script tag): cookies= calls now actually work
-- Clear error when page data is missing instead of JSONDecodeError
-
-[B]2.9.0[/B]
-- Optional login cookies on all core calls and wrapper list_* helpers, for own/private videos
-- Authenticated youtubei continuations via SAPISIDHASH headers
-
 [B]2.8.0[/B]
 - Sync core with merged upstream (peoyli + ahai72160 fixes for YouTube layout changes)
 - Wrapper hardened for new lockupViewModel/shorts shapes (tolerant title/thumbnail/duration)
 - Fixed get_channel positional-arg and list_playlists get_videos arity bugs
 - duration_converter handles H:MM:SS, live and missing durations
+- Optional login cookies on all core calls and wrapper list_* helpers, for own/private videos
+- Authenticated youtubei continuations via SAPISIDHASH headers
+- Parse logged-in page layout (yt-initial-data script tag)
 
 [B]2.5.1[/B]
 - Bump to 2.5.1 version including all commits adapted for older Kodi versions
