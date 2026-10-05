@@ -6,9 +6,15 @@ from typing import Generator, Union
 import requests
 
 try:
-    from typing_extensions import Literal
-except ImportError:  # Kodi / minimal envs without typing_extensions
-    Literal = str
+    from typing import Literal
+except ImportError:
+    try:
+        from typing_extensions import Literal
+    except ImportError:  # Kodi / minimal envs without typing_extensions
+        class _LiteralType:
+            def __getitem__(self, item):
+                return str
+        Literal = _LiteralType()
 
 type_property_map = {
     "videos": "videoRenderer",
